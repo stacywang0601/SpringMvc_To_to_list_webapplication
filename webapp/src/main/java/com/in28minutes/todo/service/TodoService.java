@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.in28minutes.model.Todo;
 
+//dont forget or it failed inject at first
+
 @Service
 public class TodoService {
 	private static List<Todo> todos = new ArrayList<Todo>();
