@@ -18,5 +18,6 @@
 	</bean>
 
 	<mvc:annotation-driven />
+	 <mvc:resources mapping="/webjars/**" location="/webjars/"/>
 
 </beans>
