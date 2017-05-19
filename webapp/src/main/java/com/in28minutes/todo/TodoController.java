@@ -59,6 +59,10 @@ public class TodoController {
 		return "redirect:/list-todos";
 	}
 
+	private String getLoggedInUserName(ModelMap model) {
+		return (String) model.get("name");
+	}
+
 	@RequestMapping(value = "/update-todo", method = RequestMethod.GET)
 	public String showUpdateTodoPage(ModelMap model, @RequestParam int id) {
 		model.addAttribute("todo", service.retrieveTodo(id));
