@@ -36,10 +36,15 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
-	public String showLoginPage(ModelMap model, String name) {
-		String user = (String) model.get("name");
+	public String listTodos(ModelMap model, String name) {
+		String user = getLoggedInUserName(model);
 		model.addAttribute("todos", service.retrieveTodos(user));
 		return "list-todos";
+	}
+
+	// Refactor getLoggedInUserName
+	private String getLoggedInUserName(ModelMap model) {
+		return (String) model.get("name");
 	}
 
 	// first click
@@ -58,10 +63,6 @@ public class TodoController {
 				false);
 		model.clear();// to prevent request parameter "name" to be passed
 		return "redirect:/list-todos";
-	}
-
-	private String getLoggedInUserName(ModelMap model) {
-		return (String) model.get("name");
 	}
 
 	@RequestMapping(value = "/update-todo", method = RequestMethod.GET)
