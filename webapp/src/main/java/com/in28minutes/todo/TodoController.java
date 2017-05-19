@@ -27,6 +27,7 @@ public class TodoController {
 	@Autowired
 	private TodoService service;
 
+	// have a standard date format across the entire application
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
