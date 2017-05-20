@@ -31,5 +31,9 @@
 	   		<filter-name>springSecurityFilterChain</filter-name>
 	    		<url-pattern>/*</url-pattern>
 	   </filter-mapping> 
+	   <!--if some exception happened in jsp page which can not be handled by global exception handler -->
+	   <error-page>
+	    <location>/WEB-INF/views/jsp/error.jsp</location>
+		</error-page>
 	    
 </web-app>
