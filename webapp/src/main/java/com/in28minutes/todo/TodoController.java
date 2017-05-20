@@ -37,15 +37,8 @@ public class TodoController {
 				dateFormat, false));
 	}
 
-	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
-	public String listTodos(ModelMap model, String name) {
-		String user = getLoggedInUserName(model);
-		model.addAttribute("todos", service.retrieveTodos(user));
-		return "list-todos";
-	}
-
 	// Refactor getLoggedInUserName
-	private String getLoggedInUserName(ModelMap model) {
+	private String getLoggedInUserName() {
 		Object principal = SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
@@ -53,6 +46,13 @@ public class TodoController {
 			return ((UserDetails) principal).getUsername();
 
 		return principal.toString();
+	}
+
+	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
+	public String listTodos(ModelMap model, String name) {
+		String user = getLoggedInUserName();
+		model.addAttribute("todos", service.retrieveTodos(user));
+		return "list-todos";
 	}
 
 	// first click
@@ -67,7 +67,7 @@ public class TodoController {
 	public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 		if (result.hasErrors())
 			return "todo";
-		service.addTodo((String) model.get("name"), todo.getDesc(), new Date(),
+		service.addTodo(getLoggedInUserName(), todo.getDesc(), new Date(),
 				false);
 		model.clear();// to prevent request parameter "name" to be passed
 		return "redirect:/list-todos";
@@ -85,7 +85,7 @@ public class TodoController {
 		if (result.hasErrors())
 			return "todo";
 
-		todo.setUser("in28Minutes"); // TODO:Remove Hardcoding Later
+		todo.setUser(getLoggedInUserName());
 		service.updateTodo(todo);
 
 		model.clear();// to prevent request parameter "name" to be passed
