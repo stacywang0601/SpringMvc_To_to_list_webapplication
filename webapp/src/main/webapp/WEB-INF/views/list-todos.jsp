@@ -2,13 +2,13 @@
 <%@ include file="common/navigation.jspf"%>
 <div class="container">
 	<table class="table table-striped">
-		<caption>Your Todos are</caption>
+		<caption><spring:message code="todo.caption"/></caption>
 
 		<thead>
 			<tr>
 				<th>Description</th>
-				<th>Date</th>
-				<th>Completed</th>
+				<th>Target Date</th>
+				<th>Is Completed?</th>
 			</tr>
 		</thead>
 
